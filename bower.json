@@ -1,0 +1,22 @@
+{
+  "name": "imjv-angular",
+  "version": "0.0.1",
+  "homepage": "https://github.com/PortChaw/is-my-json-valid",
+  "authors": [
+    "chirgwin <geoff@portchaw.com>"
+  ],
+  "description": "AngularJS service wrapper for is-my-json-valid https://github.com/mafintosh/is-my-json-valid",
+  "main": "imjv-angular.js",
+  "keywords": [
+    "angular",
+    "jsonschema"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
