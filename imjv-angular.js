@@ -36,7 +36,6 @@ function()
   var formats = require('./formats')
 
   var get = function(obj, additionalSchemas, ptr) {
-    if (/^https?:\/\//.test(ptr)) return null
 
     var visit = function(sub) {
       if (sub && sub.id === ptr) return sub
@@ -181,7 +180,7 @@ function()
         if (reporter === true) {
           validate('if (validate.errors === null) validate.errors = []')
           if (verbose) {
-            validate('validate.errors.push({field:%s,message:%s,value:%s})', formatName(prop || name), JSON.stringify(msg), value || name)
+            validate('validate.errors.push({field:%s,message:%s,value:%s,type:%s})', formatName(prop || name), JSON.stringify(msg), value || name, JSON.stringify(type))
           } else {
             validate('validate.errors.push({field:%s,message:%s})', formatName(prop || name), JSON.stringify(msg))
           }
