@@ -9,12 +9,11 @@
 
 angular.module("is-my-json-valid", [])
 .service("jsonValidationService",
-["$log",
-function($log)
+function()
 {
   var serviceObj = {};
     
-  !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.isMyJsonValid=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+  !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof serviceObj?f=serviceObj:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.isMyJsonValid=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
   exports['date-time'] = /^\d{4}-(?:0[0-9]{1}|1[0-2]{1})-[0-9]{2}[tT ]\d{2}:\d{2}:\d{2}(\.\d+)?([zZ]|[+-]\d{2}:\d{2})$/
   exports['date'] = /^\d{4}-(?:0[0-9]{1}|1[0-2]{1})-[0-9]{2}$/
   exports['time'] = /^\d{2}:\d{2}:\d{2}$/
@@ -829,21 +828,21 @@ function($log)
   var process = module.exports = {};
   
   process.nextTick = (function () {
-      var canSetImmediate = typeof window !== 'undefined'
-      && window.setImmediate;
-      var canPost = typeof window !== 'undefined'
-      && window.postMessage && window.addEventListener
+      var canSetImmediate = typeof serviceObj !== 'undefined'
+      && serviceObj.setImmediate;
+      var canPost = typeof serviceObj !== 'undefined'
+      && serviceObj.postMessage && serviceObj.addEventListener
       ;
   
       if (canSetImmediate) {
-          return function (f) { return window.setImmediate(f) };
+          return function (f) { return serviceObj.setImmediate(f) };
       }
   
       if (canPost) {
           var queue = [];
-          window.addEventListener('message', function (ev) {
+          serviceObj.addEventListener('message', function (ev) {
               var source = ev.source;
-              if ((source === window || source === null) && ev.data === 'process-tick') {
+              if ((source === serviceObj || source === null) && ev.data === 'process-tick') {
                   ev.stopPropagation();
                   if (queue.length > 0) {
                       var fn = queue.shift();
@@ -854,7 +853,7 @@ function($log)
   
           return function nextTick(fn) {
               queue.push(fn);
-              window.postMessage('process-tick', '*');
+              serviceObj.postMessage('process-tick', '*');
           };
       }
   
@@ -1484,11 +1483,10 @@ function($log)
     return Object.prototype.hasOwnProperty.call(obj, prop);
   }
   
-  }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+  }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof serviceObj !== "undefined" ? serviceObj : {})
   },{"./support/isBuffer":10,"_process":9,"inherits":8}]},{},[2])(2)
   });
 
   return serviceObj;
-}
-]);
+});
 })();
